@@ -1,6 +1,6 @@
 [project]
 name = "vault-slicer"
-version = "0.1.0"
+version = "1.0.0"
 description = "A bundling tool to share \"slice\" of part of your vault that creates portable, self-contained bundles of selected knowledge subgraphs."
 authors = [
     {name = "Mitchel Koster",email = "2762686+mitchelkoster@users.noreply.github.com"}
