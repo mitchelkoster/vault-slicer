@@ -21,9 +21,8 @@ vault_bundle/
 
 ---
 
-# How to use it
 
-## Installation for Development
+# Installation for Development
 ```bash
 poetry install --with dev
 poetry run task lint
@@ -32,6 +31,7 @@ poetry run task typecheck
 poetry run task security
 ````
 
+# How to use it
 ## Basic Export
 This will export a **single folder** _(`--target`)_ to the the destination location _(`--export`)_ based on the vault provided _(`--vault`)_:
 

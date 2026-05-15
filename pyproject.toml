@@ -16,9 +16,24 @@ vault-slicer = "vault_slicer.main:main"
 
 [tool.taskipy.tasks]
 lint = "ruff check ."
+lint-fix = "ruff check . --fix"
+format = "ruff format ."
 typecheck = "pyright"
 security = "bandit -r ."
 test = "pytest"
+
+[tool.ruff]
+line-length = 200
+
+[tool.ruff.lint]
+# style, bugs, imports, naming, security checks
+select = ["E", "F", "B", "I", "N", "UP", "S"]
+
+[tool.ruff.lint.pep8-naming]
+ignore-names = []
+extend-ignore-names = []
+classmethod-decorators = []
+staticmethod-decorators = []
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -26,10 +41,9 @@ build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
 dev = [
-    "bandit (>=1.9.4,<2.0.0)",
-    "ruff (>=0.15.13,<0.16.0)",
-    "pyright (>=1.1.409,<2.0.0)",
-    "pyproject-pre-commit (>=0.6.1,<0.7.0)",
-    "pytest (>=9.0.3,<10.0.0)",
-    "taskipy (>=1.14.1,<2.0.0)",
+    "ruff>=0.15",
+    "pyright>=1.1",
+    "bandit>=1.7",
+    "pytest>=8.0",
+    "taskipy>=1.14",
 ]
