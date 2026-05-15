@@ -1,32 +1,46 @@
 # Vault Slicer
-A bundling tool to share "slice" of part of your vault that creates portable, self-contained bundles of selected knowledge subgraphs.
+A bundling tool for exporting portable “slices” of your Obsidian vault and exports it to a new fault so you can easily share information..
 
 It recursively resolves:
 - Folder-based note collections
-- Wikilink relationships (`[[note]]`)
+- Wikilink relationships ([[note]])
 - Image and attachment dependencies
 
-And will create an easily shareable output such as:
+
+**Example Usage**
+```bash
+poetry run vault-slicer \
+  --vault '/home/mitchel/Documents/obsidian' \
+  --export '/tmp/radio' \
+  --targets 'Zettlekasten/Radio' \
+  --ignore 'Aviation' \
+  --attachments 'Files'
+```
+
+**Example output:**
 ```
 vault_bundle/
+├── .obsidian/
+│   └── app.json
 ├── notes/
 │   ├── note_1.md
 │   ├── note_2.md
-│   ├── note_3.md
-│
-└── images/
+│   └── note_3.md
+└── attachments/
     ├── imageA.png
-    ├── imageB.png
+    └── imageB.png
 ```
-
----
 
 
 # Installation for Development
 > **Note:** Before making changes to the pipeline, please verify with [act](https://github.com/nektos/act).
 
+Install dependencies:
 ```bash
 poetry install --with dev
+```
+Development commands:
+```bash
 poetry run lint = "ruff check ."
 poetry run lint-fix = "ruff check . --fix"
 poetry run format = "ruff format ."
@@ -36,26 +50,43 @@ poetry run security = "bandit -r ."
 test = "pytest"
 ```
 
-# How to use it
+# Usage Instructions
 ## Basic Export
-This will export a **single folder** _(`--target`)_ to the the destination location _(`--export`)_ based on the vault provided _(`--vault`)_:
+Export a folder from your vault into a portable Obsidian bundle:
 
 ```bash
-python export.py \
+poetry run vault-slicer \
   --vault ~/ObsidianVault \
   --export ~/exports/vault_bundle \
-  --targets zettlekasten/virtualization
+  --targets Zettlekasten/Radio
 ```
-## Multiple Folders:
+## Multiple Targets:
 This will export a **mutiple folders** _(`--target`)_ to the the destination location _(`--export`)_ based on the vault provided _(`--vault`)_:
 ```bash
-python export.py \
+poetry run vault-slicer \
   --vault ~/ObsidianVault \
-  --export ~/exports/bundle \
-  --targets zettlekasten/virtualization zettlekasten/something_else
+  --export ~/exports/vault_bundle \
+  --targets \
+    Zettlekasten/Radio \
+    Zettlekasten/Aviation
 ```
-## Ignore system folders
-You can also ignore folders, by adding the `--ignore` flag:
+## Ignore Folders
+Exclude folders from traversal:
 ```bash
---ignore templates daily system
+poetry run vault-slicer \
+  --vault ~/ObsidianVault \
+  --export ~/exports/vault_bundle \
+  --targets Zettlekasten \
+  --ignore Templates Daily System
 ```
+## Custom Attachment Folder
+If your Obsidian vault stores attachments in a custom directory:
+```bash
+poetry run vault-slicer \
+  --vault ~/ObsidianVault \
+  --export ~/exports/vault_bundle \
+  --targets Zettlekasten/Radio \
+  --attachments Files
+```
+
+This configures the exported vault to use `attachments/` as the Obsidian attachment directory internally.
