@@ -1,5 +1,5 @@
 # Vault Slicer
-A bundling tool for exporting portable “slices” of your Obsidian vault and exports it to a new fault so you can easily share information..
+A bundling tool for exporting portable “slices” of your Obsidian vault and exports it to a new fault so you can easily share information.
 
 It recursively resolves:
 - Folder-based note collections
@@ -48,7 +48,7 @@ vault_bundle/
 
 
 # Installation for Development
-> **Note:** Before making changes to the pipeline, please verify with [act](https://github.com/nektos/act).
+> **Note:** Before making changes to the pipeline, please verify with [act](https://github.com/nektos/act) and set secrets `act --secret-file .secrets`.
 
 Install dependencies:
 ```bash
