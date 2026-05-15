@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from vault_slicer.obsidian_parser import ObsidianParser
@@ -174,7 +175,7 @@ def test_export_copies_notes_and_images(tmp_path):
     parser.export()
 
     exported_note = export / "notes" / "A.md"
-    exported_image = export / "images" / "image.png"
+    exported_image = export / "attachments" / "image.png"
 
     assert exported_note.exists()
     assert exported_image.exists()
@@ -182,3 +183,24 @@ def test_export_copies_notes_and_images(tmp_path):
     content = exported_note.read_text()
 
     assert "[B](B.md)" in content
+
+
+def test_export_creates_obsidian_vault(tmp_path):
+    parser = make_parser(tmp_path)
+
+    vault = parser._vault
+    export = parser._export_path
+
+    write_note(vault / "A.md", "Hello")
+
+    parser.export()
+
+    obsidian_dir = export / ".obsidian"
+    app_json = obsidian_dir / "app.json"
+
+    assert obsidian_dir.exists()
+    assert app_json.exists()
+
+    config = json.loads(app_json.read_text())
+
+    assert config["attachmentFolderPath"] == "attachments"

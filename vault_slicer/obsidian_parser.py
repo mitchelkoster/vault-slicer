@@ -1,3 +1,4 @@
+import json
 import logging
 import re
 import shutil
@@ -82,12 +83,21 @@ class ObsidianParser:
         return {n.stem: n.name for n in notes}
 
     def export(self):
+        # Create an Obsidian directory
+        obsidian_dir = self._export_path / ".obsidian"
+        obsidian_dir.mkdir(parents=True, exist_ok=True)
+
+        app_config = {"attachmentFolderPath": "attachments"}
+
+        (obsidian_dir / "app.json").write_text(json.dumps(app_config, indent=2))
+
+        # Find and parse notes
         notes = self._collect_notes(self._vault, self._targets, self._ignore)
         note_map = self._build_note_map(notes)
 
         # Create output directories
         out_notes = self._export_path / "notes"
-        out_images = self._export_path / "images"
+        out_images = self._export_path / "attachments"
         out_notes.mkdir(parents=True, exist_ok=True)
         out_images.mkdir(parents=True, exist_ok=True)
 
