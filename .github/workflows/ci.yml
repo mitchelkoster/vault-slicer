@@ -1,0 +1,44 @@
+name: Continuous Integration (CI)
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Add Poetry to PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: "poetry"
+
+      - name: Install dependencies
+        run: poetry install --with dev
+
+      - name: Ruff lint
+        run: poetry run task lint
+
+      - name: Ruff format check
+        run: poetry run task format-check
+
+      - name: Type check
+        run: poetry run task typecheck
+
+      - name: Security scan
+        run: poetry run task security
+
+      - name: Run tests
+        run: poetry run task test

@@ -20,21 +20,18 @@ lint-fix = "ruff check . --fix"
 format = "ruff format ."
 format-check = "ruff format --check ."
 typecheck = "pyright"
-security = "bandit -r ."
+security = "bandit -r vault_slicer"
 test = "pytest"
 
 [tool.ruff]
-line-length = 200
+line-length = 120
 
 [tool.ruff.lint]
 # style, bugs, imports, naming, security checks
 select = ["E", "F", "B", "I", "N", "UP", "S"]
 
-[tool.ruff.lint.pep8-naming]
-ignore-names = []
-extend-ignore-names = []
-classmethod-decorators = []
-staticmethod-decorators = []
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
