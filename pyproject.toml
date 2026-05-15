@@ -8,8 +8,16 @@ authors = [
 license = "GNU General Public License v3.0"
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
-dependencies = [
+packages = [
+    { include = "vault_slicer" }
 ]
+
+dependencies = [
+    "rich (>=15.0.0,<16.0.0)"
+]
+
+[tool.poetry]
+name = "vault-slicer"
 
 [tool.poetry.scripts]
 vault-slicer = "vault_slicer.main:main"

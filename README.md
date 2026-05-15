@@ -1,5 +1,5 @@
 # Vault Slicer
-A bundling tool for exporting portable “slices” of your Obsidian vault and exports it to a new fault so you can easily share information..
+A bundling tool for exporting portable “slices” of your Obsidian vault and exports it to a new fault so you can easily share information.
 
 It recursively resolves:
 - Folder-based note collections
@@ -15,6 +15,21 @@ poetry run vault-slicer \
   --targets 'Zettlekasten/Radio' \
   --ignore 'Aviation' \
   --attachments 'Files'
+```
+
+Or when using Docker:
+```bash
+docker build -t vault-slicer .
+docker run --rm -it \
+  --user $(id -u):$(id -g) \
+  -v /home/mitchel/Documents/obsidian:/vault \
+  -v ~/exports/radio:/export \
+  vault-slicer \
+  --vault /vault \
+  --export /export \
+  --targets Zettlekasten/Radio \
+  --ignore Aviation \
+  --attachments Files
 ```
 
 **Example output:**
@@ -33,7 +48,7 @@ vault_bundle/
 
 
 # Installation for Development
-> **Note:** Before making changes to the pipeline, please verify with [act](https://github.com/nektos/act).
+> **Note:** Before making changes to the pipeline, please verify with [act](https://github.com/nektos/act) and set secrets `act --secret-file .secrets`.
 
 Install dependencies:
 ```bash
