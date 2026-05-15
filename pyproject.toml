@@ -1,0 +1,19 @@
+[project]
+name = "vault-slicer"
+version = "0.1.0"
+description = "A bundling tool to share \"slice\" of part of your vault that creates portable, self-contained bundles of selected knowledge subgraphs."
+authors = [
+    {name = "Mitchel Koster",email = "2762686+mitchelkoster@users.noreply.github.com"}
+]
+license = "GNU General Public License v3.0"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+]
+
+[tool.poetry.scripts]
+vault-slicer = "vault_slicer.main:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -23,6 +23,12 @@ vault_bundle/
 
 # How to use it
 
+## Installation
+```bash
+poetry install
+poetry run vault-slicer -h
+````
+
 ## Basic Export
 This will export a **single folder** _(`--target`)_ to the the destination location _(`--export`)_ based on the vault provided _(`--vault`)_:
 
