@@ -17,6 +17,21 @@ poetry run vault-slicer \
   --attachments 'Files'
 ```
 
+Or when using Docker:
+```bash
+docker build -t vault-slicer .
+docker run --rm -it \
+  --user $(id -u):$(id -g) \
+  -v /home/mitchel/Documents/obsidian:/vault \
+  -v ~/exports/radio:/export \
+  vault-slicer \
+  --vault /vault \
+  --export /export \
+  --targets Zettlekasten/Radio \
+  --ignore Aviation \
+  --attachments Files
+```
+
 **Example output:**
 ```
 vault_bundle/
