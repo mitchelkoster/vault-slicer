@@ -16,6 +16,9 @@ dependencies = [
     "rich (>=15.0.0,<16.0.0)"
 ]
 
+[tool.poetry]
+name = "vault-slicer"
+
 [tool.poetry.scripts]
 vault-slicer = "vault_slicer.main:main"
 
