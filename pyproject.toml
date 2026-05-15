@@ -7,13 +7,29 @@ authors = [
 ]
 license = "GNU General Public License v3.0"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11,<4.0"
 dependencies = [
 ]
 
 [tool.poetry.scripts]
 vault-slicer = "vault_slicer.main:main"
 
+[tool.taskipy.tasks]
+lint = "ruff check ."
+typecheck = "pyright"
+security = "bandit -r ."
+test = "pytest"
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "bandit (>=1.9.4,<2.0.0)",
+    "ruff (>=0.15.13,<0.16.0)",
+    "pyright (>=1.1.409,<2.0.0)",
+    "pyproject-pre-commit (>=0.6.1,<0.7.0)",
+    "pytest (>=9.0.3,<10.0.0)",
+    "taskipy (>=1.14.1,<2.0.0)",
+]

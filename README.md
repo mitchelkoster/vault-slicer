@@ -23,10 +23,13 @@ vault_bundle/
 
 # How to use it
 
-## Installation
+## Installation for Development
 ```bash
-poetry install
-poetry run vault-slicer -h
+poetry install --with dev
+poetry run task lint
+poetry run task test
+poetry run task typecheck
+poetry run task security
 ````
 
 ## Basic Export
