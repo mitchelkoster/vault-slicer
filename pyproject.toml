@@ -1,0 +1,47 @@
+[project]
+name = "vault-slicer"
+version = "0.1.0"
+description = "A bundling tool to share \"slice\" of part of your vault that creates portable, self-contained bundles of selected knowledge subgraphs."
+authors = [
+    {name = "Mitchel Koster",email = "2762686+mitchelkoster@users.noreply.github.com"}
+]
+license = "GNU General Public License v3.0"
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+]
+
+[tool.poetry.scripts]
+vault-slicer = "vault_slicer.main:main"
+
+[tool.taskipy.tasks]
+lint = "ruff check ."
+lint-fix = "ruff check . --fix"
+format = "ruff format ."
+format-check = "ruff format --check ."
+typecheck = "pyright"
+security = "bandit -r vault_slicer"
+test = "pytest"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+# style, bugs, imports, naming, security checks
+select = ["E", "F", "B", "I", "N", "UP", "S"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15",
+    "pyright>=1.1",
+    "bandit>=1.7",
+    "pytest>=8.0",
+    "taskipy>=1.14",
+]
