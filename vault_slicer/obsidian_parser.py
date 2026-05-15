@@ -2,6 +2,7 @@ import json
 import logging
 import re
 import shutil
+from rich import print
 
 
 class ObsidianParser:
@@ -83,6 +84,10 @@ class ObsidianParser:
         return {n.stem: n.name for n in notes}
 
     def export(self):
+        print(f"[bold cyan]Exporting too:[/bold cyan]")
+        print(f"  [bold green]{self._export_path}[/bold green]")
+        print()
+
         # Create an Obsidian directory
         obsidian_dir = self._export_path / ".obsidian"
         obsidian_dir.mkdir(parents=True, exist_ok=True)
@@ -94,6 +99,11 @@ class ObsidianParser:
         # Find and parse notes
         notes = self._collect_notes(self._vault, self._targets, self._ignore)
         note_map = self._build_note_map(notes)
+
+        print(f"[bold cyan]Found {len(note_map)} notes:[/bold cyan]")
+        for note_name in note_map:
+            print(f"  [yellow]note:[/yellow] [bold]{note_name}[/bold]")
+        print()
 
         # Create output directories
         out_notes = self._export_path / "notes"
@@ -119,3 +129,9 @@ class ObsidianParser:
                     if img_path.name not in copied_images:
                         shutil.copy2(img_path, out_images / img_path.name)
                         copied_images.add(img_path.name)
+
+        if (len(copied_images) > 0):
+            print(f"[bold cyan]Found {len(copied_images)} attachments:[/bold cyan]")
+            for img_name in copied_images:
+                print(f"  [yellow]image:[/yellow] {img_name}")
+        
