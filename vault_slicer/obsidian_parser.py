@@ -2,6 +2,7 @@ import json
 import logging
 import re
 import shutil
+
 from rich import print
 
 
@@ -84,7 +85,7 @@ class ObsidianParser:
         return {n.stem: n.name for n in notes}
 
     def export(self):
-        print(f"[bold cyan]Exporting too:[/bold cyan]")
+        print("[bold cyan]Exporting too:[/bold cyan]")
         print(f"  [bold green]{self._export_path}[/bold green]")
         print()
 
@@ -130,8 +131,7 @@ class ObsidianParser:
                         shutil.copy2(img_path, out_images / img_path.name)
                         copied_images.add(img_path.name)
 
-        if (len(copied_images) > 0):
+        if len(copied_images) > 0:
             print(f"[bold cyan]Found {len(copied_images)} attachments:[/bold cyan]")
             for img_name in copied_images:
                 print(f"  [yellow]image:[/yellow] {img_name}")
-        
