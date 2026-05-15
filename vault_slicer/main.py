@@ -2,9 +2,7 @@ import argparse
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Export Obsidian sub-vault with dependency resolution"
-    )
+    parser = argparse.ArgumentParser(description="Export Obsidian sub-vault with dependency resolution")
 
     parser.add_argument("--vault", required=True, help="Path to Obsidian vault")
     parser.add_argument("--export", required=True, help="Export output folder")
@@ -18,9 +16,7 @@ def parse_args():
 
     parser.add_argument("--ignore", nargs="*", default=[], help="Folders to ignore")
 
-    parser.add_argument(
-        "--max-depth", type=int, default=10, help="Safety limit for recursion depth"
-    )
+    parser.add_argument("--max-depth", type=int, default=10, help="Safety limit for recursion depth")
 
     return parser.parse_args()
 

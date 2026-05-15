@@ -23,13 +23,18 @@ vault_bundle/
 
 
 # Installation for Development
+> **Note:** Before making changes to the pipeline, please verify with [act](https://github.com/nektos/act).
+
 ```bash
 poetry install --with dev
-poetry run task lint
-poetry run task test
-poetry run task typecheck
-poetry run task security
-````
+poetry run lint = "ruff check ."
+poetry run lint-fix = "ruff check . --fix"
+poetry run format = "ruff format ."
+poetry run format-check = "ruff format --check ."
+poetry run typecheck = "pyright"
+poetry run security = "bandit -r ."
+test = "pytest"
+```
 
 # How to use it
 ## Basic Export
